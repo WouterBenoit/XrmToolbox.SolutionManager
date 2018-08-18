@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
-            this.tsbCreateSolutions = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dgSolutions = new System.Windows.Forms.DataGridView();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -44,22 +43,13 @@
             this.toolStripMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripButton2,
-            this.tsbCreateSolutions,
-            this.tssSeparator1});
+            this.tssSeparator1,
+            this.toolStripButton2});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(875, 25);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
-            // 
-            // tsbCreateSolutions
-            // 
-            this.tsbCreateSolutions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCreateSolutions.Name = "tsbCreateSolutions";
-            this.tsbCreateSolutions.Size = new System.Drawing.Size(125, 22);
-            this.tsbCreateSolutions.Text = "Create TMP Solutions";
-            this.tsbCreateSolutions.Click += new System.EventHandler(this.tsbCreateSolutions_Click);
             // 
             // tssSeparator1
             // 
@@ -128,7 +118,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStrip toolStripMenu;
-        private System.Windows.Forms.ToolStripButton tsbCreateSolutions;
         private System.Windows.Forms.ToolStripSeparator tssSeparator1;
         private System.Windows.Forms.DataGridView dgSolutions;
         private System.Windows.Forms.ToolStripButton toolStripButton1;

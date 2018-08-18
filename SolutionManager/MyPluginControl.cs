@@ -190,14 +190,16 @@ namespace SolutionManager
                         }
                     }
 
-                    if (solutionsToDelete.Count == 0)
+                    if (!solutionsToDelete.Any())
                     {
                         MessageBox.Show("Please select at least one solution to delete", "Select solutions", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
-
+                    if (MessageBox.Show(string.Format("Are you sure you want to delete {0} solutions", solutionsToDelete.Count), "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
+                    }
                 },
                 PostWorkCallBack = (args) =>
                 {
