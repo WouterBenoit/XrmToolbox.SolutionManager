@@ -152,7 +152,7 @@ namespace SolutionManager
                     DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
                     chk.Name = "chk";
                     chk.HeaderText = string.Empty;
-                    if (!dgSolutions.Columns.Contains("chk")) dgSolutions.Columns.Insert(0, chk);
+                    if (!dgSolutions.Columns.Contains("chk")) dgSolutions.Columns.Insert(0, chk);   
 
                     //Column layout
                     dgSolutions.Columns["EntityName"].Visible = false;
