@@ -138,9 +138,7 @@ namespace SolutionManager
                     MySolutionManager solutionManager = new MySolutionManager();
 
                     List<Solution> solutions = new List<Solution>();
-
                     results.Entities.ToList().ForEach(e => solutions.Add(solutionManager.ConvertToSolution(e)));
-
                     args.Result = solutions;
                 },
                 PostWorkCallBack = (args) =>
