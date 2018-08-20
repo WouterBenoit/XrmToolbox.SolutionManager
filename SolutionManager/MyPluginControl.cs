@@ -157,12 +157,14 @@ namespace SolutionManager
                     if (solutionsToDelete.Count == 0)
                     {
                         MessageBox.Show("Please select at least one solution to delete", "Select solutions", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        args.Result = false;
                     }
-
-                    bool deletionConfirmed = MessageBox.Show(string.Format("Are you sure you want to delete {0} solution?", solutionsToDelete.Count), "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-                    if (deletionConfirmed) solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
-                    args.Result = deletionConfirmed;
+                    else
+                    {
+                        bool deletionConfirmed = MessageBox.Show(string.Format("Are you sure you want to delete {0} solution?", solutionsToDelete.Count), "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                        if (deletionConfirmed) solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
+                        args.Result = deletionConfirmed;
+                    }
                 },
                 PostWorkCallBack = (args) =>
                 {
