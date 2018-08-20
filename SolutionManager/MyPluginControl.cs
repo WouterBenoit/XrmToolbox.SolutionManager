@@ -31,7 +31,6 @@ namespace SolutionManager
             if (!SettingsManager.Instance.TryLoad(GetType(), out mySettings))
             {
                 mySettings = new Settings();
-
                 LogWarning("Settings not found => a new settings file has been created!");
             }
             else
@@ -39,7 +38,7 @@ namespace SolutionManager
                 LogInfo("Settings found and loaded");
             }
 
-            base.ExecuteMethod(LoadSolutions);
+            if (base.Service != null) this.LoadSolutions();
         }
 
         /// <summary>
@@ -50,6 +49,7 @@ namespace SolutionManager
             base.UpdateConnection(newService, detail, actionName, parameter);
             //mySettings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
             LogInfo("Connection has changed to: {0}", detail.WebApplicationUrl);
+            this.LoadSolutions();
         }
 
         #region Events
@@ -67,59 +67,24 @@ namespace SolutionManager
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
-            CloseTool();
+            base.CloseTool();
         }
 
         private void tsbReloadSolutions_Click(object sender, EventArgs e)
         {
-            this.LoadSolutions();
+            this.ExecuteMethod(LoadSolutions);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            this.DeleteSolutions();
+            if(this.Service == null) this.ExecuteMethod(LoadSolutions);
+            if(this.Service != null) this.DeleteSolutions();
         }
         
-        private void tsbCreateSolutions_Click(object sender, EventArgs e)
-        {
-            this.CreateSolutions();
-        }
-
         #endregion Events
 
 
         #region Private Methods
-
-        private void CreateSolutions()
-        {
-            WorkAsync(new WorkAsyncInfo
-            {
-                Message = "Creating solutions...",
-                Work = (worker, args) =>
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        try
-                        {
-                            Entity creator = new Entity("solution");
-                            creator["uniquename"] = string.Format("Solution{0}", i);
-                            creator["friendlyname"] = string.Format("Solution{0}", i);
-                            creator["version"] = "1.0";
-                            creator["description"] = string.Format("Description for solution {0}", i);
-                            creator["publisherid"] = new EntityReference("publisher", Guid.Parse("00000001-0000-0000-0000-00000000005a"));
-
-                            base.Service.Create(creator);
-                        }
-                        catch(Exception ex)
-                        { }
-                    }
-                },
-                PostWorkCallBack = (args) =>
-                {
-                    this.LoadSolutions();
-                }
-            });
-        }
 
         private void LoadSolutions()
         {
@@ -166,7 +131,6 @@ namespace SolutionManager
                     dgSolutions.Columns["Description"].ReadOnly = true;
                 }
             });
-
         }
 
         private void DeleteSolutions()
@@ -190,24 +154,25 @@ namespace SolutionManager
                         }
                     }
 
-                    if (!solutionsToDelete.Any())
+                    if (solutionsToDelete.Count == 0)
                     {
                         MessageBox.Show("Please select at least one solution to delete", "Select solutions", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        args.Result = false;
                     }
-
-                    if (MessageBox.Show(string.Format("Are you sure you want to delete {0} solutions", solutionsToDelete.Count), "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    else
                     {
-                        solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
+                        bool deletionConfirmed = MessageBox.Show(string.Format("Are you sure you want to delete {0} solution?", solutionsToDelete.Count), "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                        if (deletionConfirmed) solutionsToDelete.ForEach(s => base.Service.Delete(s.EntityName, s.SolutionId));
+                        args.Result = deletionConfirmed;
                     }
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    this.LoadSolutions();
+                    bool refresh = (bool)args.Result;
+                    if (refresh) this.LoadSolutions();
                 }
             });
         }
-
 
         #endregion private Methods
 
