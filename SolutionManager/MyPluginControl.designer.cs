@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
-            this.tsbCreateSolutions = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dgSolutions = new System.Windows.Forms.DataGridView();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSolutions)).BeginInit();
             this.SuspendLayout();
@@ -44,22 +43,29 @@
             this.toolStripMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripButton2,
-            this.tsbCreateSolutions,
-            this.tssSeparator1});
+            this.tssSeparator1,
+            this.toolStripButton2});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(875, 25);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
-            // tsbCreateSolutions
+            // toolStripButton1
             // 
-            this.tsbCreateSolutions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCreateSolutions.Name = "tsbCreateSolutions";
-            this.tsbCreateSolutions.Size = new System.Drawing.Size(125, 22);
-            this.tsbCreateSolutions.Text = "Create TMP Solutions";
-            this.tsbCreateSolutions.Click += new System.EventHandler(this.tsbCreateSolutions_Click);
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(86, 22);
+            this.toolStripButton1.Text = "Close this tool";
+            this.toolStripButton1.Click += new System.EventHandler(this.tsbClose_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(99, 22);
+            this.toolStripButton2.Text = "Reload Solutions";
+            this.toolStripButton2.Click += new System.EventHandler(this.tsbReloadSolutions_Click);
             // 
             // tssSeparator1
             // 
@@ -77,14 +83,6 @@
             this.dgSolutions.Size = new System.Drawing.Size(850, 377);
             this.dgSolutions.TabIndex = 5;
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(86, 22);
-            this.toolStripButton1.Text = "Close this tool";
-            this.toolStripButton1.Click += new System.EventHandler(this.tsbClose_Click);
-            // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -99,14 +97,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(99, 22);
-            this.toolStripButton2.Text = "Reload Solutions";
-            this.toolStripButton2.Click += new System.EventHandler(this.tsbReloadSolutions_Click);
             // 
             // MyPluginControl
             // 
@@ -128,7 +118,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStrip toolStripMenu;
-        private System.Windows.Forms.ToolStripButton tsbCreateSolutions;
         private System.Windows.Forms.ToolStripSeparator tssSeparator1;
         private System.Windows.Forms.DataGridView dgSolutions;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
