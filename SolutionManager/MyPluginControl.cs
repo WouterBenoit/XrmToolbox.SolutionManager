@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -95,7 +95,7 @@ namespace SolutionManager
                 {
                     QueryExpression qry = new QueryExpression("solution");
                     qry.Criteria.AddCondition("ismanaged", ConditionOperator.Equal, false);
-                    qry.ColumnSet = new ColumnSet("description", "friendlyname", "uniquename", "version");
+                    qry.ColumnSet = new ColumnSet("description", "friendlyname", "uniquename", "version", "installedon");
                     qry.Orders.Add(new OrderExpression("friendlyname", OrderType.Ascending));
 
                     EntityCollection results = base.Service.RetrieveMultiple(qry);
@@ -121,13 +121,17 @@ namespace SolutionManager
                     dgSolutions.Columns["EntityName"].Visible = false;
                     dgSolutions.Columns["SolutionId"].Visible = false;
                     dgSolutions.Columns["chk"].Width = 25;
+                    dgSolutions.Columns["InstalledOn"].Width = (dgSolutions.Width * 10 / 100);
+                    dgSolutions.Columns["InstalledOn"].ReadOnly = true;
+                    dgSolutions.Columns["InstalledOn"].SortMode = DataGridViewColumnSortMode.Automatic; //Doesn't Sort because sorting in .Net is controlled by datasource, not the DataGridView control.
                     dgSolutions.Columns["Version"].Width = (dgSolutions.Width * 10 / 100);
                     dgSolutions.Columns["Version"].ReadOnly = true;
                     dgSolutions.Columns["UniqueName"].Width = (dgSolutions.Width * 20 / 100);
                     dgSolutions.Columns["UniqueName"].ReadOnly = true;
                     dgSolutions.Columns["FriendlyName"].Width = (dgSolutions.Width * 20 / 100);
                     dgSolutions.Columns["FriendlyName"].ReadOnly = true;
-                    dgSolutions.Columns["Description"].Width = (dgSolutions.Width * 40 / 100);
+                    dgSolutions.Columns["FriendlyName"].SortMode = DataGridViewColumnSortMode.Automatic; //Doesn't Sort because sorting in .Net is controlled by datasource, not the DataGridView control.
+                    dgSolutions.Columns["Description"].Width = (dgSolutions.Width * 30 / 100);
                     dgSolutions.Columns["Description"].ReadOnly = true;
                 }
             });

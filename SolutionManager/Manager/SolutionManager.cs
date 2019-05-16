@@ -1,4 +1,4 @@
-﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk;
 using SolutionManager.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,8 @@ namespace SolutionManager.Manager
             s.UniqueName = entity.GetAttributeValue<string>("uniquename");
             s.Description = entity.GetAttributeValue<string>("description");
             s.Version = entity.GetAttributeValue<string>("version");
-
+            s.InstalledOn = (string)entity.GetAttributeValue<DateTime>("installedon").ToString();
+            
             return s;
         }
     }
