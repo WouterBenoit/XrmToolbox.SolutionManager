@@ -1,4 +1,4 @@
-﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace SolutionManager.Models
         public Guid SolutionId { get; set; }
         public string UniqueName { get; set; }
         public string FriendlyName { get; set; }
+        public string InstalledOn { get; set; }
         public string Version { get; set; }
         public string Description { get; set; }
 
